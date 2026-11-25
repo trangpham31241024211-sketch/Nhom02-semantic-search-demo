@@ -47,8 +47,8 @@ function App() {
     loadProducts();
   }, []);
 
-  const handleSearch = async (searchQuery) => {
-    const text = (searchQuery !== undefined ? searchQuery : query).trim();
+  const handleSearch = async () => {
+    const text = query.trim();
     if (!text) {
       setError("Vui lòng nhập nội dung tìm kiếm.");
       return;
@@ -121,11 +121,6 @@ function App() {
     }
   };
 
-  const handleSampleClick = (sampleQuery) => {
-    setQuery(sampleQuery);
-    handleSearch(sampleQuery);
-  };
-
   return (
     <div className="app">
       <header>
@@ -142,36 +137,13 @@ function App() {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder="Nhập nhu cầu tìm kiếm (VD: đồ chơi siêu anh hùng, trang phục lễ hội...)"
           />
-          <button onClick={() => handleSearch()} disabled={loading}>
+          <button onClick={handleSearch} disabled={loading}>
             {loading ? "Đang tìm..." : "Tìm kiếm"}
           </button>
         </div>
 
-        {/* Gợi ý tìm kiếm nhanh */}
-        <div style={{ marginTop: "10px", marginBottom: "15px", display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center" }}>
-          <span style={{ fontSize: "0.9rem", color: "#666", alignSelf: "center" }}>Gợi ý:</span>
-          {["đồ chơi trẻ em", "trang phục hóa trang", "sticker dán", "mô hình xe lửa", "búp bê siêu nhân"].map((tag) => (
-            <button
-              key={tag}
-              onClick={() => handleSampleClick(tag)}
-              disabled={loading}
-              style={{
-                fontSize: "0.85rem",
-                padding: "4px 10px",
-                borderRadius: "15px",
-                border: "1px solid #ddd",
-                background: "#f8f9fa",
-                cursor: "pointer",
-                transition: "all 0.2s"
-              }}
-            >
-              🔍 {tag}
-            </button>
-          ))}
-        </div>
-
         {statusMessage && (
-          <p style={{ color: "#0066cc", fontStyle: "italic", textAlign: "center" }}>
+          <p style={{ color: "#0066cc", fontStyle: "italic", textAlign: "center", marginTop: "12px" }}>
             ⏳ {statusMessage}
           </p>
         )}
@@ -179,7 +151,7 @@ function App() {
         {error && <p className="error">{error}</p>}
 
         {searchTime !== null && results.length > 0 && (
-          <p style={{ fontSize: "0.85rem", color: "#666", textAlign: "center" }}>
+          <p style={{ fontSize: "0.85rem", color: "#666", textAlign: "center", marginTop: "12px" }}>
             ⚡ Tìm thấy {results.length} sản phẩm phù hợp trong {searchTime}ms
           </p>
         )}
@@ -203,7 +175,7 @@ function App() {
         )}
 
         {!loading && !error && results.length === 0 && (
-          <p className="empty">Nhập từ khóa hoặc bấm vào các gợi ý ở trên để bắt đầu tìm kiếm.</p>
+          <p className="empty">Nhập từ khóa để bắt đầu tìm kiếm sản phẩm.</p>
         )}
       </main>
     </div>
