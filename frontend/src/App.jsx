@@ -125,7 +125,7 @@ function App() {
     <div className="app">
       <header>
         <h1>Semantic Product Search</h1>
-        <p>Tìm kiếm sản phẩm thông minh bằng ngữ nghĩa (Chạy trực tiếp trên trình duyệt)</p>
+        <p>Tìm kiếm sản phẩm thông minh bằng ngữ nghĩa</p>
       </header>
 
       <main>
@@ -135,7 +135,7 @@ function App() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            placeholder="Nhập nhu cầu tìm kiếm (VD: đồ chơi siêu anh hùng, trang phục lễ hội...)"
+            placeholder="Nhập nhu cầu tìm kiếm"
           />
           <button onClick={handleSearch} disabled={loading}>
             {loading ? "Đang tìm..." : "Tìm kiếm"}
